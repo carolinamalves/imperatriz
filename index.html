@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Imperatriz | Salão de Cabeleireiro</title>
+<meta name="description" content="Studio Imperatriz — Cortes, coloração e tratamentos capilares com elegância e perfeição. Marque já a sua consulta.">
+
+<!-- TODO: trocar por favicon real -->
+<link rel="icon" href="data:,">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#inicio" class="logo">Studio <span>Imperatriz</span></a>
+
+    <nav class="nav" id="nav">
+      <a href="#inicio" class="nav__link">Início</a>
+      <a href="#sobre" class="nav__link">Sobre</a>
+      <a href="#servicos" class="nav__link">Serviços</a>
+      <a href="#galeria" class="nav__link">Galeria</a>
+      <a href="#avaliacoes" class="nav__link">Avaliações</a>
+      <a href="#contacto" class="nav__link">Contacto</a>
+    </nav>
+
+    <div class="header__actions">
+      <!-- TODO: trocar número de telefone -->
+      <a href="https://wa.me/351900000000" target="_blank" rel="noopener" class="btn btn--primary btn--small">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.6.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3a8.2 8.2 0 1 1 6.9 3.8z"/></svg>
+        Marcar
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="hero__bg" style="background-image:url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=80');"></div>
+  <div class="hero__overlay"></div>
+  <div class="container hero__content reveal">
+    <p class="eyebrow">O salão preferido da comunidade brasileira</p>
+    <h1 class="hero__title">Beleza e elegância<br>em cada detalhe</h1>
+    <p class="hero__subtitle">
+      <!-- TODO: ajustar cidade / bairro -->
+      Cortes, coloração, tratamentos capilares e penteados de evento, num espaço pensado para te fazeres sentir imperatriz.
+    </p>
+    <div class="hero__cta">
+      <a href="https://wa.me/351900000000" target="_blank" rel="noopener" class="btn btn--primary">Marcar Consulta</a>
+      <a href="#servicos" class="btn btn--ghost">Ver Serviços</a>
+    </div>
+  </div>
+  <a href="#sobre" class="scroll-hint" aria-label="Deslizar para baixo">
+    <span></span>
+  </a>
+</section>
+
+<!-- ===== SOBRE ===== -->
+<section class="sobre" id="sobre">
+  <div class="container sobre__inner">
+    <div class="sobre__image reveal">
+      <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=900&q=80" alt="Interior do Studio Imperatriz">
+      <div class="sobre__badge">
+        <strong>+10</strong>
+        <span>anos de experiência</span>
+      </div>
+    </div>
+
+    <div class="sobre__text reveal">
+      <p class="eyebrow">Sobre nós</p>
+      <h2>Um espaço feito para mulheres que se querem sentir únicas</h2>
+      <p>
+        <!-- TODO: substituir por texto/história real da dona do salão -->
+        O Studio Imperatriz nasceu do sonho de trazer para Portugal o cuidado e a técnica dos salões brasileiros,
+        especializados em todo o tipo de texturas de cabelo. Aqui, cada cliente é recebida como imperatriz — com atenção,
+        detalhe e produtos de alta qualidade.
+      </p>
+      <p>
+        A nossa equipa é especializada em cabelo cacheado, crespo, liso e ondulado, e trabalha para realçar a beleza natural
+        de cada uma, sempre com muito carinho e profissionalismo.
+      </p>
+
+      <div class="stats">
+        <div class="stats__item">
+          <strong>500+</strong>
+          <span>Clientes satisfeitas</span>
+        </div>
+        <div class="stats__item">
+          <strong>4.9</strong>
+          <span>Avaliação média Google</span>
+        </div>
+        <div class="stats__item">
+          <strong>10+</strong>
+          <span>Anos de experiência</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVIÇOS & PREÇOS ===== -->
+<section class="servicos" id="servicos">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Serviços</p>
+      <h2>O que fazemos por ti</h2>
+      <p class="section-head__desc">
+        <!-- TODO: confirmar lista de serviços e preços reais -->
+        Preços de referência — para um orçamento exato, fala connosco via WhatsApp.
+      </p>
+    </div>
+
+    <div class="servicos__grid reveal">
+      <div class="servico-card">
+        <h3>Cortes</h3>
+        <ul>
+          <li><span>Corte feminino</span><span class="price">desde 20€</span></li>
+          <li><span>Corte + Escova</span><span class="price">desde 30€</span></li>
+          <li><span>Corte infantil</span><span class="price">desde 15€</span></li>
+        </ul>
+      </div>
+
+      <div class="servico-card servico-card--featured">
+        <span class="servico-card__tag">Mais popular</span>
+        <h3>Coloração & Mechas</h3>
+        <ul>
+          <li><span>Coloração completa</span><span class="price">desde 45€</span></li>
+          <li><span>Mechas / Balayage</span><span class="price">desde 60€</span></li>
+          <li><span>Retoque de raiz</span><span class="price">desde 35€</span></li>
+        </ul>
+      </div>
+
+      <div class="servico-card">
+        <h3>Tratamentos</h3>
+        <ul>
+          <li><span>Hidratação profunda</span><span class="price">desde 25€</span></li>
+          <li><span>Botox capilar</span><span class="price">desde 50€</span></li>
+          <li><span>Reconstrução</span><span class="price">desde 40€</span></li>
+        </ul>
+      </div>
+
+      <div class="servico-card">
+        <h3>Penteados & Eventos</h3>
+        <ul>
+          <li><span>Penteado de festa</span><span class="price">desde 35€</span></li>
+          <li><span>Penteado de noiva</span><span class="price">desde 80€</span></li>
+          <li><span>Trança / Braids</span><span class="price">desde 30€</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALERIA ===== -->
+<section class="galeria" id="galeria">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Galeria</p>
+      <h2>Trabalhos recentes</h2>
+    </div>
+
+    <!-- TODO: substituir todas as imagens por fotos reais do salão -->
+    <div class="galeria__grid reveal">
+      <div class="galeria__item"><img src="https://images.unsplash.com/photo-1522336572468-97b06e8ef143?auto=format&fit=crop&w=700&q=80" alt="Trabalho de cabelo 1" loading="lazy"></div>
+      <div class="galeria__item"><img src="https://images.unsplash.com/photo-1595475884562-073c30d45670?auto=format&fit=crop&w=700&q=80" alt="Trabalho de cabelo 2" loading="lazy"></div>
+      <div class="galeria__item"><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=700&q=80" alt="Trabalho de cabelo 3" loading="lazy"></div>
+      <div class="galeria__item"><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=700&q=80" alt="Trabalho de cabelo 4" loading="lazy"></div>
+      <div class="galeria__item"><img src="https://images.unsplash.com/photo-1519415943484-9fa1873496d4?auto=format&fit=crop&w=700&q=80" alt="Trabalho de cabelo 5" loading="lazy"></div>
+      <div class="galeria__item"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=700&q=80" alt="Trabalho de cabelo 6" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">&times;</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- ===== AVALIAÇÕES ===== -->
+<section class="avaliacoes" id="avaliacoes">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Avaliações</p>
+      <h2>O que dizem as nossas clientes</h2>
+
+      <div class="google-badge">
+        <svg class="google-badge__icon" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34.1 5.1 29.3 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.7-.4-3.5z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.9 19 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34.1 5.1 29.3 3 24 3 16.3 3 9.7 7.3 6.3 14.7z"/>
+          <path fill="#4CAF50" d="M24 45c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 36.5 26.7 37 24 37c-5.2 0-9.6-3.3-11.2-8l-6.5 5C9.6 40.6 16.2 45 24 45z"/>
+          <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.2-4.1 5.6l6.2 5.2C40.9 36 44 30.6 44 24c0-1.4-.1-2.7-.4-3.5z"/>
+        </svg>
+        <div>
+          <strong>4.9</strong>
+          <div class="google-badge__stars">★★★★★</div>
+          <span><!-- TODO: número real de avaliações -->baseado em 120+ avaliações no Google</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testemunhos reveal" id="testemunhos">
+      <!-- TODO: trocar por testemunhos/reviews reais (copiar do Google) -->
+      <div class="testemunho-card">
+        <div class="stars">★★★★★</div>
+        <p>"Fiquei apaixonada com o resultado! A equipa entende mesmo de cabelo cacheado, coisa rara por aqui."</p>
+        <div class="testemunho-card__author">
+          <span class="avatar">A</span>
+          <div><strong>Ana P.</strong><small>Cliente Google</small></div>
+        </div>
+      </div>
+      <div class="testemunho-card">
+        <div class="stars">★★★★★</div>
+        <p>"Atendimento impecável, ambiente super acolhedor e o meu balayage ficou perfeito. Recomendo de olhos fechados!"</p>
+        <div class="testemunho-card__author">
+          <span class="avatar">M</span>
+          <div><strong>Mariana S.</strong><small>Cliente Google</small></div>
+        </div>
+      </div>
+      <div class="testemunho-card">
+        <div class="stars">★★★★★</div>
+        <p>"Finalmente um salão que trata bem o cabelo crespo. Já sou cliente fixa e recomendo a todas as amigas."</p>
+        <div class="testemunho-card__author">
+          <span class="avatar">C</span>
+          <div><strong>Carla F.</strong><small>Cliente Google</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="avaliacoes__cta reveal">
+      <!-- TODO: trocar pelo link real do Google Business -->
+      <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="btn btn--ghost">Ver todas as avaliações no Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section class="contacto" id="contacto">
+  <div class="container contacto__inner">
+    <div class="contacto__info reveal">
+      <p class="eyebrow">Contacto</p>
+      <h2>Vem conhecer-nos</h2>
+      <p class="section-head__desc">Estamos à tua espera para cuidar do teu cabelo com todo o carinho.</p>
+
+      <ul class="info-list">
+        <li>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <!-- TODO: morada real -->
+          <span>Rua Exemplo, 123, 1000-000 Lisboa</span>
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+          <!-- TODO: telefone real -->
+          <span>+351 900 000 000</span>
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div class="horario">
+            <div><span>Seg — Sex</span><span>09:30 – 19:30</span></div>
+            <div><span>Sábado</span><span>09:30 – 17:00</span></div>
+            <div><span>Domingo</span><span>Fechado</span></div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="socials">
+        <!-- TODO: trocar links das redes sociais -->
+        <a href="#" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener" aria-label="Facebook" class="social-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 9h3V5.5h-3C11.8 5.5 10 7.3 10 9.5V12H8v3.5h2V21h3.5v-5.5H16l.5-3.5h-3V9.7c0-.5.4-.7.8-.7z"/></svg>
+        </a>
+        <a href="https://wa.me/351900000000" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.6.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.9-2-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3a8.2 8.2 0 1 1 6.9 3.8z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="contacto__map reveal">
+      <!-- TODO: trocar pelo embed real do Google Maps com a morada do salão -->
+      <iframe
+        src="https://www.google.com/maps?q=Lisboa&output=embed"
+        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" title="Localização do Studio Imperatriz">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="#inicio" class="logo logo--footer">Studio <span>Imperatriz</span></a>
+    <p class="footer__tagline">Beleza e elegância em cada detalhe.</p>
+
+    <nav class="footer__nav">
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <p class="footer__copy">
+      &copy; <span id="year"></span> Studio Imperatriz. Todos os direitos reservados.
+      <!-- TODO: trocar pelo nome da tua empresa/marca de desenvolvimento web -->
+      <br>Website desenvolvido por [O Teu Nome / Empresa].
+    </p>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
