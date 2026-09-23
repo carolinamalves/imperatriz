@@ -465,91 +465,78 @@ html.has-fine-cursor .cursor { display: block; }
   to { transform: translateX(-50%); }
 }
 
-/* ===== Galeria ===== */
-.galeria { padding: 0; overflow: hidden; }
-.galeria__pin {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 48px;
-  padding: 110px 0;
+/* ===== Como funciona ===== */
+.processo { padding: 110px 0; }
+.processo__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 56px;
 }
-.galeria .section-head { margin-bottom: 0; }
+.processo__item {
+  padding-top: 22px;
+  border-top: 1px solid rgba(28, 21, 18, 0.14);
+}
 
-.galeria__track {
-  display: flex;
-  gap: 24px;
-  padding-left: max(24px, calc((100vw - 1180px) / 2 + 24px));
-  padding-right: 24px;
-  will-change: transform;
-}
-.galeria__item {
-  flex: 0 0 clamp(240px, 32vw, 400px);
-  border-radius: var(--radius);
-  overflow: hidden;
-  aspect-ratio: 3/4;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-}
-.galeria__item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.galeria__item:hover img { transform: scale(1.08); }
-
-.galeria__item--video { position: relative; }
-.galeria__item--video video {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.5s ease;
-  pointer-events: none;
-}
-.galeria__item--video:hover video { transform: scale(1.08); }
-.galeria__play {
-  position: absolute;
-  top: 16px; left: 16px;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: rgba(20, 14, 10, 0.55);
-  backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
-  pointer-events: none;
-}
-.galeria__play svg { width: 16px; height: 16px; margin-left: 2px; }
-
-@media (max-width: 899px) {
-  .galeria__pin { min-height: 0; padding: 90px 0; }
-  .galeria__track {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
+/* Tesoura que corta as 4 linhas (só ≥ 961px; em ecrãs pequenos ficam as
+   linhas simples de cada passo). --p = posição da tesoura (0→1) e --cut =
+   quanto de cada linha já foi cortado (0→1), ambos definidos pelo JS ao
+   ritmo do scroll. Sem GSAP fica tudo já "cortado" (--p / --cut a 1). */
+.processo__cut { display: none; }
+@media (min-width: 961px) {
+  .processo__cut {
+    --p: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    position: relative;
+    margin-top: 56px;
+    color: var(--color-terracotta);
   }
-  .galeria__item { scroll-snap-align: start; flex-basis: 78vw; }
-}
+  html.gsap-ready .processo__cut { --p: 0; }
+  .processo__grid { margin-top: 0; }
+  .processo__item { border-top: none; padding-top: 6px; }
 
-.lightbox {
-  position: fixed; inset: 0;
-  background: rgba(15, 10, 8, 0.92);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 2000;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s ease;
-  padding: 40px;
+  .processo__seg { --cut: 1; position: relative; height: 30px; }
+  html.gsap-ready .processo__seg { --cut: 0; }
+  .processo__seg::before,
+  .processo__seg::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 1px;
+  }
+  /* linha inteira (ainda por cortar) */
+  .processo__seg::before {
+    background: rgba(28, 21, 18, 0.22);
+    clip-path: inset(0 0 0 calc(var(--cut) * 100%));
+  }
+  /* linha já cortada: tracejado */
+  .processo__seg::after {
+    background: repeating-linear-gradient(90deg, var(--color-gold) 0 6px, transparent 6px 12px);
+    clip-path: inset(0 calc((1 - var(--cut)) * 100%) 0 0);
+  }
+
+  .processo__scissors {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--p) * 100%);
+    width: 48px; height: 26px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
 }
-.lightbox.is-open { opacity: 1; pointer-events: auto; }
-.lightbox img, .lightbox video { max-width: 90vw; max-height: 85vh; border-radius: var(--radius); }
-.lightbox video { display: none; background: #000; }
-.lightbox.is-video img { display: none; }
-.lightbox.is-video video { display: block; }
-.lightbox__close {
-  position: absolute; top: 24px; right: 32px;
-  background: none; border: none;
-  color: var(--color-white);
-  font-size: 2.4rem;
-  cursor: pointer;
+.processo__num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  color: var(--color-gold);
+  opacity: 0.55;
+  margin-bottom: 14px;
   line-height: 1;
 }
+.processo__item h3 { font-size: 1.25rem; margin-bottom: 10px; }
+.processo__item p { color: var(--color-text-light); font-size: 0.92rem; }
 
 
 /* ===== A Fundadora ===== */
@@ -669,33 +656,8 @@ html.has-fine-cursor .cursor { display: block; }
 }
 
 
-/* ===== Como funciona ===== */
-.processo { padding: 110px 0; }
-.processo__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-  margin-top: 56px;
-}
-.processo__item {
-  padding-top: 22px;
-  border-top: 1px solid rgba(28, 21, 18, 0.14);
-}
-.processo__num {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 4vw, 3.2rem);
-  color: var(--color-gold);
-  opacity: 0.55;
-  margin-bottom: 14px;
-  line-height: 1;
-}
-.processo__item h3 { font-size: 1.25rem; margin-bottom: 10px; }
-.processo__item p { color: var(--color-text-light); font-size: 0.92rem; }
-
-
 /* ===== Serviços ===== */
-.servicos { background: var(--color-bg-alt); }
+.servicos { background: var(--color-bg); }
 .servicos__list { margin-top: 24px; border-top: 1px solid rgba(28, 21, 18, 0.14); }
 
 .servico-row {
@@ -765,6 +727,93 @@ html.has-fine-cursor .cursor { display: block; }
 @media (max-width: 760px) {
   .servico-row { grid-template-columns: 1fr; gap: 10px; }
   .servico-row__thumb { display: none; }
+}
+
+
+/* ===== Galeria ===== */
+.galeria { padding: 0; overflow: hidden; background: var(--color-bg-alt); }
+.galeria__pin {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48px;
+  padding: 110px 0;
+}
+.galeria .section-head { margin-bottom: 0; }
+
+.galeria__track {
+  display: flex;
+  gap: 24px;
+  padding-left: max(24px, calc((100vw - 1180px) / 2 + 24px));
+  padding-right: 24px;
+  will-change: transform;
+}
+.galeria__item {
+  flex: 0 0 clamp(240px, 32vw, 400px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.galeria__item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.galeria__item:hover img { transform: scale(1.08); }
+
+.galeria__item--video { position: relative; }
+.galeria__item--video video {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+.galeria__item--video:hover video { transform: scale(1.08); }
+.galeria__play {
+  position: absolute;
+  top: 16px; left: 16px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(20, 14, 10, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  pointer-events: none;
+}
+.galeria__play svg { width: 16px; height: 16px; margin-left: 2px; }
+
+@media (max-width: 899px) {
+  .galeria__pin { min-height: 0; padding: 90px 0; }
+  .galeria__track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .galeria__item { scroll-snap-align: start; flex-basis: 78vw; }
+}
+
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(15, 10, 8, 0.92);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2000;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 40px;
+}
+.lightbox.is-open { opacity: 1; pointer-events: auto; }
+.lightbox img, .lightbox video { max-width: 90vw; max-height: 85vh; border-radius: var(--radius); }
+.lightbox video { display: none; background: #000; }
+.lightbox.is-video img { display: none; }
+.lightbox.is-video video { display: block; }
+.lightbox__close {
+  position: absolute; top: 24px; right: 32px;
+  background: none; border: none;
+  color: var(--color-white);
+  font-size: 2.4rem;
+  cursor: pointer;
+  line-height: 1;
 }
 
 

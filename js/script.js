@@ -241,6 +241,47 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   });
 
+  // ---- Tesoura a "cortar" as 4 linhas de "Como funciona" (presa ao scroll) ----
+  const cutEl = document.getElementById('processoCut');
+  if (cutEl) {
+    const segs = cutEl.querySelectorAll('.processo__seg');
+    const bladeTop = cutEl.querySelector('.blade--top');
+    const bladeBottom = cutEl.querySelector('.blade--bottom');
+    const handleTop = cutEl.querySelector('.handle--top');
+    const handleBottom = cutEl.querySelector('.handle--bottom');
+    const mmCut = gsap.matchMedia();
+    mmCut.add('(min-width: 961px)', () => {
+      gsap.set([bladeTop, bladeBottom, handleTop, handleBottom], { svgOrigin: '22 12' });
+      const update = (p) => {
+        const W = cutEl.offsetWidth;
+        cutEl.style.setProperty('--p', p);
+        segs.forEach(seg => {
+          const x0 = seg.offsetLeft, w = seg.offsetWidth;
+          const cut = Math.min(1, Math.max(0, (p * W - x0) / w));
+          seg.style.setProperty('--cut', cut);
+        });
+        // Snip: as argolas E as pontas fecham juntas. Cada braço é cabo +
+        // lâmina; para fechar, o cabo roda para o eixo por um lado e a
+        // lâmina roda para o eixo pelo outro (ângulos ≈ a inclinação de
+        // cada peça + uma pequena folga para se cruzarem).
+        const openness = (1 + Math.cos(p * Math.PI * 2 * 6)) / 2; // 1 = aberta, 0 = fechada
+        const k = 1 - openness;
+        gsap.set(handleTop, { rotation: -27 * k });
+        gsap.set(handleBottom, { rotation: 27 * k });
+        gsap.set(bladeTop, { rotation: 19 * k });
+        gsap.set(bladeBottom, { rotation: -19 * k });
+      };
+      update(0);
+      ScrollTrigger.create({
+        trigger: cutEl,
+        start: 'top 85%',
+        end: 'top 30%',
+        scrub: 0.4,
+        onUpdate: self => update(self.progress)
+      });
+    });
+  }
+
   // ---- Painéis "cortina" sobre as imagens (wipe reveal), também presos ao scroll ----
   document.querySelectorAll('[data-wipe]').forEach(wipeEl => {
     const panel = wipeEl.querySelector('.wipe-panel');

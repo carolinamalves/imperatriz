@@ -114,7 +114,7 @@
         Lisboa <span></span>
       </p>
 
-      <a href="#galeria" class="scroll-hint" aria-label="Deslizar para baixo">
+      <a href="#processo" class="scroll-hint" aria-label="Deslizar para baixo">
         <span></span>
       </a>
     </section>
@@ -173,12 +173,240 @@
       </div>
     </div>
 
+    <!-- ===== COMO FUNCIONA ===== -->
+    <section class="processo" id="processo">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <p class="eyebrow">Como funciona</p>
+          <h2>Da marcação ao momento Imperatriz</h2>
+        </div>
+
+        <!-- Tesoura que "corta" as 4 linhas ao fazer scroll (só em ecrãs largos) -->
+        <div class="processo__cut" id="processoCut" aria-hidden="true">
+          <span class="processo__seg"></span>
+          <span class="processo__seg"></span>
+          <span class="processo__seg"></span>
+          <span class="processo__seg"></span>
+          <svg
+            class="processo__scissors"
+            viewBox="0 0 44 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <!-- cada braço = cabo (argola) + lâmina; rodam em sentidos opostos para
+                 argolas e pontas fecharem em simultâneo -->
+            <g class="handle handle--top">
+              <circle cx="7" cy="5" r="3.6" />
+              <path d="M9.8 7.4 L22 12" />
+            </g>
+            <g class="blade blade--top">
+              <path d="M22 12 L42 6" />
+            </g>
+            <g class="handle handle--bottom">
+              <circle cx="7" cy="19" r="3.6" />
+              <path d="M9.8 16.6 L22 12" />
+            </g>
+            <g class="blade blade--bottom">
+              <path d="M22 12 L42 18" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="processo__grid">
+          <div class="processo__item reveal-up">
+            <span class="processo__num">01</span>
+            <h3>Marque</h3>
+            <p>
+              Escolha o serviço, o profissional e o horário que melhor se adapta
+              a si.
+            </p>
+          </div>
+          <div class="processo__item reveal-up">
+            <span class="processo__num">02</span>
+            <h3>Chegue</h3>
+            <p>Entre num espaço pensado para abrandar, cuidar e desfrutar.</p>
+          </div>
+          <div class="processo__item reveal-up">
+            <span class="processo__num">03</span>
+            <h3>Desfrute</h3>
+            <p>Deixe-se mimar por nós e entregue-se à experiência.</p>
+          </div>
+          <div class="processo__item reveal-up">
+            <span class="processo__num">04</span>
+            <h3>Imperatriz</h3>
+            <p>
+              Saia com novo look e um boost de confiança para levar consigo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== A FUNDADORA ===== -->
+    <section class="fundadora" id="fundadora">
+      <div class="fundadora__image reveal-img" data-wipe>
+        <img
+          src="images/photos/monica.jpg"
+          alt="Mônica Carnot, fundadora da Imperatriz"
+        />
+        <div class="wipe-panel"></div>
+        <button
+          class="fundadora__play"
+          type="button"
+          data-video-trigger="images/videos/salao-monica-mensagem.mp4"
+          data-video-poster="images/videos/salao-monica-mensagem-poster.jpg"
+          aria-label="Ver mensagem em vídeo da Mônica"
+        >
+          <span class="fundadora__play-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+          <span>Ver mensagem</span>
+        </button>
+      </div>
+      <div class="fundadora__content">
+        <p class="eyebrow reveal-up">Sobre nós</p>
+        <h2 class="fundadora__name reveal-up">Mônica Carnot</h2>
+        <p class="fundadora__role reveal-up">
+          Fundadora &amp; Master Colorista
+        </p>
+        <p class="fundadora__quote reveal-up">
+          "Vim do Brasil com uma missão: mostrar a Portugal o que é cuidar de
+          verdade de cada tipo de cabelo. Cada cliente que se senta na minha
+          cadeira sai diferente — não só o cabelo, a postura."
+        </p>
+        <p class="fundadora__script">Mônica</p>
+      </div>
+    </section>
+
+    <!-- ===== SERVIÇOS & PREÇOS ===== -->
+    <section class="servicos" id="servicos">
+      <div class="container">
+        <div class="section-head reveal-up">
+          <p class="eyebrow">Serviços</p>
+          <h2>O que fazemos por si</h2>
+          <p class="section-head__desc">
+            <!-- TODO: confirmar lista de serviços e preços reais -->
+            Preços de referência — para um orçamento exato, fala connosco via
+            WhatsApp.
+          </p>
+        </div>
+
+        <div class="servicos__list">
+          <div
+            class="servico-row reveal-up"
+            data-thumb="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=80"
+          >
+            <span class="servico-row__num">01</span>
+            <div class="servico-row__main">
+              <h3>Cortes</h3>
+              <ul>
+                <li>
+                  <span>Corte feminino</span
+                  ><span class="price">desde 20€</span>
+                </li>
+                <li>
+                  <span>Corte + Escova</span
+                  ><span class="price">desde 30€</span>
+                </li>
+                <li>
+                  <span>Corte infantil</span
+                  ><span class="price">desde 15€</span>
+                </li>
+              </ul>
+            </div>
+            <div class="servico-row__thumb"></div>
+          </div>
+
+          <div
+            class="servico-row reveal-up"
+            data-thumb="https://images.unsplash.com/photo-1712213396688-c6f2d536671f?auto=format&fit=crop&w=500&q=80"
+          >
+            <span class="servico-row__num">02</span>
+            <div class="servico-row__main">
+              <h3>
+                Coloração &amp; Mechas
+                <span class="servico-row__tag">Mais popular</span>
+              </h3>
+              <ul>
+                <li>
+                  <span>Coloração completa</span
+                  ><span class="price">desde 45€</span>
+                </li>
+                <li>
+                  <span>Mechas / Balayage</span
+                  ><span class="price">desde 60€</span>
+                </li>
+                <li>
+                  <span>Retoque de raiz</span
+                  ><span class="price">desde 35€</span>
+                </li>
+              </ul>
+            </div>
+            <div class="servico-row__thumb"></div>
+          </div>
+
+          <div
+            class="servico-row reveal-up"
+            data-thumb="https://images.unsplash.com/photo-1717160675643-53a7a2ebaa9f?auto=format&fit=crop&w=500&q=80"
+          >
+            <span class="servico-row__num">03</span>
+            <div class="servico-row__main">
+              <h3>Tratamentos</h3>
+              <ul>
+                <li>
+                  <span>Hidratação profunda</span
+                  ><span class="price">desde 25€</span>
+                </li>
+                <li>
+                  <span>Botox capilar</span><span class="price">desde 50€</span>
+                </li>
+                <li>
+                  <span>Reconstrução</span><span class="price">desde 40€</span>
+                </li>
+              </ul>
+            </div>
+            <div class="servico-row__thumb"></div>
+          </div>
+
+          <div
+            class="servico-row reveal-up"
+            data-thumb="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=500&q=80"
+          >
+            <span class="servico-row__num">04</span>
+            <div class="servico-row__main">
+              <h3>Penteados &amp; Eventos</h3>
+              <ul>
+                <li>
+                  <span>Penteado de festa</span
+                  ><span class="price">desde 35€</span>
+                </li>
+                <li>
+                  <span>Penteado de noiva</span
+                  ><span class="price">desde 80€</span>
+                </li>
+                <li>
+                  <span>Trança / Braids</span
+                  ><span class="price">desde 30€</span>
+                </li>
+              </ul>
+            </div>
+            <div class="servico-row__thumb"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== GALERIA (scroll horizontal fixo) ===== -->
     <section class="galeria" id="galeria">
       <div class="galeria__pin" id="galeriaPin">
         <div class="container section-head reveal-up">
           <p class="eyebrow">Galeria</p>
-          <h2>Trabalhos recentes</h2>
+          <h2>Entre rainha, saia Imperatriz</h2>
         </div>
 
         <div class="galeria__track" id="galeriaTrack">
@@ -292,215 +520,6 @@
       </div>
     </section>
 
-    <!-- ===== A FUNDADORA ===== -->
-    <section class="fundadora" id="fundadora">
-      <div class="fundadora__image reveal-img" data-wipe>
-        <img
-          src="images/photos/monica.jpg"
-          alt="Mônica Carnot, fundadora da Imperatriz"
-        />
-        <div class="wipe-panel"></div>
-        <button
-          class="fundadora__play"
-          type="button"
-          data-video-trigger="images/videos/salao-monica-mensagem.mp4"
-          data-video-poster="images/videos/salao-monica-mensagem-poster.jpg"
-          aria-label="Ver mensagem em vídeo da Mônica"
-        >
-          <span class="fundadora__play-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </span>
-          <span>Ver mensagem</span>
-        </button>
-      </div>
-      <div class="fundadora__content">
-        <p class="eyebrow reveal-up">Sobre nós</p>
-        <h2 class="fundadora__name reveal-up">Mônica Carnot</h2>
-        <p class="fundadora__role reveal-up">
-          Fundadora &amp; Master Colorista
-        </p>
-        <p class="fundadora__quote reveal-up">
-          "Vim do Brasil com uma missão: mostrar a Portugal o que é cuidar de
-          verdade de cada tipo de cabelo. Cada cliente que se senta na minha
-          cadeira sai diferente — não só o cabelo, a postura."
-        </p>
-        <p class="fundadora__script">Mônica</p>
-      </div>
-    </section>
-
-    <!-- ===== STATEMENT ===== -->
-    <section class="statement">
-      <img class="statement__crown" src="images/icons/coroavector-gold.png" alt="" />
-      <p class="statement__text" data-split-words>
-        Cada cliente entra rainha. Sai Imperatriz.
-      </p>
-    </section>
-
-    <!-- ===== COMO FUNCIONA ===== -->
-    <section class="processo">
-      <div class="container">
-        <div class="section-head reveal-up">
-          <p class="eyebrow">Como funciona</p>
-          <h2>Da marcação à sua nova versão</h2>
-        </div>
-
-        <div class="processo__grid">
-          <div class="processo__item reveal-up">
-            <span class="processo__num">01</span>
-            <h3>Marcas</h3>
-            <p>
-              Via WhatsApp ou Instagram, escolhes o serviço e o horário que
-              preferires.
-            </p>
-          </div>
-          <div class="processo__item reveal-up">
-            <span class="processo__num">02</span>
-            <h3>Chegas</h3>
-            <p>
-              Recebemos-te com café, boa conversa e um espaço pensado para
-              relaxares.
-            </p>
-          </div>
-          <div class="processo__item reveal-up">
-            <span class="processo__num">03</span>
-            <h3>Transformação</h3>
-            <p>
-              As nossas mãos, a técnica brasileira e a sua história capilar em
-              conjunto.
-            </p>
-          </div>
-          <div class="processo__item reveal-up">
-            <span class="processo__num">04</span>
-            <h3>Sais Imperatriz</h3>
-            <p>
-              Novo corte, nova cor, nova confiança — prontas para o mundo lá
-              fora.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SERVIÇOS & PREÇOS ===== -->
-    <section class="servicos" id="servicos">
-      <div class="container">
-        <div class="section-head reveal-up">
-          <p class="eyebrow">Serviços</p>
-          <h2>O que fazemos por ti</h2>
-          <p class="section-head__desc">
-            <!-- TODO: confirmar lista de serviços e preços reais -->
-            Preços de referência — para um orçamento exato, fala connosco via
-            WhatsApp.
-          </p>
-        </div>
-
-        <div class="servicos__list">
-          <div
-            class="servico-row reveal-up"
-            data-thumb="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=80"
-          >
-            <span class="servico-row__num">01</span>
-            <div class="servico-row__main">
-              <h3>Cortes</h3>
-              <ul>
-                <li>
-                  <span>Corte feminino</span
-                  ><span class="price">desde 20€</span>
-                </li>
-                <li>
-                  <span>Corte + Escova</span
-                  ><span class="price">desde 30€</span>
-                </li>
-                <li>
-                  <span>Corte infantil</span
-                  ><span class="price">desde 15€</span>
-                </li>
-              </ul>
-            </div>
-            <div class="servico-row__thumb"></div>
-          </div>
-
-          <div
-            class="servico-row reveal-up"
-            data-thumb="https://images.unsplash.com/photo-1712213396688-c6f2d536671f?auto=format&fit=crop&w=500&q=80"
-          >
-            <span class="servico-row__num">02</span>
-            <div class="servico-row__main">
-              <h3>
-                Coloração &amp; Mechas
-                <span class="servico-row__tag">Mais popular</span>
-              </h3>
-              <ul>
-                <li>
-                  <span>Coloração completa</span
-                  ><span class="price">desde 45€</span>
-                </li>
-                <li>
-                  <span>Mechas / Balayage</span
-                  ><span class="price">desde 60€</span>
-                </li>
-                <li>
-                  <span>Retoque de raiz</span
-                  ><span class="price">desde 35€</span>
-                </li>
-              </ul>
-            </div>
-            <div class="servico-row__thumb"></div>
-          </div>
-
-          <div
-            class="servico-row reveal-up"
-            data-thumb="https://images.unsplash.com/photo-1717160675643-53a7a2ebaa9f?auto=format&fit=crop&w=500&q=80"
-          >
-            <span class="servico-row__num">03</span>
-            <div class="servico-row__main">
-              <h3>Tratamentos</h3>
-              <ul>
-                <li>
-                  <span>Hidratação profunda</span
-                  ><span class="price">desde 25€</span>
-                </li>
-                <li>
-                  <span>Botox capilar</span><span class="price">desde 50€</span>
-                </li>
-                <li>
-                  <span>Reconstrução</span><span class="price">desde 40€</span>
-                </li>
-              </ul>
-            </div>
-            <div class="servico-row__thumb"></div>
-          </div>
-
-          <div
-            class="servico-row reveal-up"
-            data-thumb="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=500&q=80"
-          >
-            <span class="servico-row__num">04</span>
-            <div class="servico-row__main">
-              <h3>Penteados &amp; Eventos</h3>
-              <ul>
-                <li>
-                  <span>Penteado de festa</span
-                  ><span class="price">desde 35€</span>
-                </li>
-                <li>
-                  <span>Penteado de noiva</span
-                  ><span class="price">desde 80€</span>
-                </li>
-                <li>
-                  <span>Trança / Braids</span
-                  ><span class="price">desde 30€</span>
-                </li>
-              </ul>
-            </div>
-            <div class="servico-row__thumb"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
       <button class="lightbox__close" id="lightboxClose" aria-label="Fechar">
@@ -604,7 +623,7 @@
       <div class="container contacto__inner">
         <div class="contacto__info reveal-up">
           <p class="eyebrow">Contacto</p>
-          <h2>A sua coroa está à sua espera</h2>
+          <h2>Uma coroa à sua espera</h2>
 
           <ul class="info-list">
             <li>
@@ -654,7 +673,6 @@
           </ul>
 
           <div class="socials">
-            <!-- TODO: trocar pelos links reais do Instagram e Facebook -->
             <a
               href="#"
               target="_blank"
@@ -730,7 +748,11 @@
     <footer class="footer">
       <div class="container footer__inner">
         <a href="#inicio" class="brand brand--footer">
-          <img class="brand__crown" src="images/icons/coroavector-gold.png" alt="" />
+          <img
+            class="brand__crown"
+            src="images/icons/coroavector-gold.png"
+            alt=""
+          />
           <span class="brand__word">Imperatriz</span>
           <span class="brand__script">by Mônica Carnot</span>
         </a>
