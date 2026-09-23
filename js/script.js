@@ -1,11 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const hasGSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+  const hasScrollTo = typeof window.ScrollToPlugin !== 'undefined';
   const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  // A classe "gsap-ready" já foi adicionada mais cedo por um script
+  // inline no <head> (para esconder os elementos antes da primeira
+  // pintura, sem "piscar"). Se o GSAP afinal não carregou, removemo-la
+  // aqui para tudo voltar a ficar visível (fallback seguro).
   if (hasGSAP) {
     gsap.registerPlugin(ScrollTrigger);
-    document.documentElement.classList.add('gsap-ready');
+    if (hasScrollTo) gsap.registerPlugin(ScrollToPlugin);
+  } else {
+    document.documentElement.classList.remove('gsap-ready');
+  }
+
+  // ---- Scroll suave para os links âncora (substitui o CSS
+  // scroll-behavior:smooth, que entra em conflito com o scrub do
+  // ScrollTrigger e causa engasgos nas animações). ----
+  if (hasGSAP && hasScrollTo) {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href');
+        if (!id || id.length < 2) return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        gsap.to(window, { duration: 1, ease: 'power2.inOut', scrollTo: { y: target, autoKill: true } });
+      });
+    });
+  }
+
+  // ---- Recalcular posições ao terminar de carregar tudo (imagens
+  // lazy podem alterar a altura da página depois do primeiro cálculo). ----
+  if (hasGSAP) {
+    window.addEventListener('load', () => ScrollTrigger.refresh());
   }
 
   // ---- Ano no footer ----
@@ -53,22 +82,51 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape' && navOverlay.classList.contains('is-open')) closeMenu();
   });
 
-  // ---- Lightbox da galeria ----
+  // ---- Lightbox da galeria (fotos e o vídeo) ----
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxVideo = document.getElementById('lightboxVideo');
   const lightboxClose = document.getElementById('lightboxClose');
 
   document.querySelectorAll('.galeria__item img').forEach(img => {
     img.addEventListener('click', () => {
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt;
+      lightbox.classList.remove('is-video');
       lightbox.classList.add('is-open');
       document.body.style.overflow = 'hidden';
     });
   });
 
+  const openLightboxVideo = (src, poster) => {
+    lightboxVideo.src = src;
+    lightboxVideo.poster = poster || '';
+    lightboxVideo.currentTime = 0;
+    lightbox.classList.add('is-video', 'is-open');
+    document.body.style.overflow = 'hidden';
+    lightboxVideo.play().catch(() => {});
+  };
+
+  // Vídeos da galeria (já em loop, silenciosos): clicar abre no lightbox com som
+  document.querySelectorAll('.galeria__item--video').forEach(item => {
+    item.addEventListener('click', () => {
+      const sourceVideo = item.querySelector('video');
+      sourceVideo.pause();
+      openLightboxVideo(sourceVideo.currentSrc || sourceVideo.src);
+    });
+  });
+
+  // Qualquer outro gatilho de vídeo (ex: "Ver mensagem" na foto da Mônica)
+  document.querySelectorAll('[data-video-trigger]').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      openLightboxVideo(trigger.dataset.videoTrigger, trigger.dataset.videoPoster);
+    });
+  });
+
   const closeLightbox = () => {
     lightbox.classList.remove('is-open');
+    lightboxVideo.pause();
+    document.querySelectorAll('.galeria__item--video video').forEach(v => v.play().catch(() => {}));
     document.body.style.overflow = '';
   };
 
@@ -106,25 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return el.querySelectorAll('.word');
   }
 
-  // ---- Entrada do hero: coroa cai, "IMPERATRIZ" letra a letra, script, resto em stagger ----
-  const heroCrown = document.querySelector('.hero__brand-crown');
-  const heroScript = document.querySelector('.hero__brand-script');
-  const heroWordEl = document.querySelector('.hero__brand-word');
-  const heroWordChars = splitText(heroWordEl, 'chars');
-
-  gsap.set(heroCrown, { opacity: 0, y: -30, scale: 0.6, transformOrigin: 'center' });
-  gsap.set(heroScript, { opacity: 0, y: 22 });
-  gsap.set(heroWordChars, { opacity: 0, y: 55, rotateZ: 8 });
-
-  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.15 });
-  heroTl
-    .to(heroCrown, { opacity: 1, y: 0, scale: 1, duration: 0.85 })
-    .to(heroWordChars, { opacity: 1, y: 0, rotateZ: 0, duration: 0.75, stagger: 0.035 }, '-=0.45')
-    .to(heroScript, { opacity: 1, y: 0, duration: 0.6 }, '-=0.35')
+  // ---- Entrada do hero: título, subtítulo, CTA e etiquetas em stagger ----
+  gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.15 })
     .fromTo('[data-hero-item]',
       { opacity: 0, y: 34 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.15 },
-      '-=0.3'
+      { opacity: 1, y: 0, duration: 1, stagger: 0.15 }
     );
 
   // ---- Hero fixo (pin) com parallax/zoom acentuado ao fazer scroll ----
@@ -138,84 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
     .to('#heroContent', { opacity: 0, y: -120, scale: 0.82, ease: 'none' }, 0)
-    .to('#heroBg', { scale: 1.35, ease: 'none' }, 0);
-
-  // ---- Revelação em scroll (agrupada por proximidade, mais amplitude) ----
-  ScrollTrigger.batch('.reveal-up', {
-    start: 'top 88%',
-    onEnter: batch => gsap.fromTo(batch,
-      { opacity: 0, y: 56 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.12, ease: 'power3.out' }
-    )
-  });
-  ScrollTrigger.batch('.reveal-img', {
-    start: 'top 88%',
-    onEnter: batch => gsap.fromTo(batch,
-      { opacity: 0, y: 56, scale: 0.9 },
-      { opacity: 1, y: 0, scale: 1, duration: 1.1, stagger: 0.12, ease: 'power3.out' }
-    )
-  });
-
-  // ---- Painéis "cortina" sobre as imagens (wipe reveal) ----
-  document.querySelectorAll('[data-wipe]').forEach(wipeEl => {
-    const panel = wipeEl.querySelector('.wipe-panel');
-    if (!panel) return;
-    gsap.set(panel, { scaleX: 1 });
-    gsap.to(panel, {
-      scaleX: 0,
-      duration: 1.2,
-      ease: 'power4.inOut',
-      scrollTrigger: { trigger: wipeEl, start: 'top 78%' }
-    });
-  });
-
-  // ---- Statement: coroa + frase palavra a palavra em 3D ----
-  gsap.fromTo('.statement__crown',
-    { opacity: 0, scale: 0.85 },
-    {
-      opacity: 0.05, scale: 1, duration: 1.6, ease: 'power2.out',
-      scrollTrigger: { trigger: '.statement', start: 'top 65%' }
-    }
-  );
-  const statementWords = splitText(document.querySelector('.statement__text'), 'words');
-  gsap.fromTo(statementWords,
-    { opacity: 0, y: 60, rotateX: -50 },
-    {
-      opacity: 1, y: 0, rotateX: 0, duration: 0.9, stagger: 0.06, ease: 'power3.out',
-      scrollTrigger: { trigger: '.statement', start: 'top 65%' }
-    }
-  );
-
-  // ---- CTA final: coroa de fundo a revelar ----
-  gsap.fromTo('.final-cta__crown',
-    { opacity: 0, scale: 0.85 },
-    {
-      opacity: 0.04, scale: 1, duration: 1.6, ease: 'power2.out',
-      scrollTrigger: { trigger: '.final-cta', start: 'top 70%' }
-    }
-  );
-
-  // ---- Contadores (stats) ----
-  document.querySelectorAll('[data-count-to]').forEach(el => {
-    const target = parseFloat(el.dataset.countTo);
-    const decimals = parseInt(el.dataset.countDecimals || '0', 10);
-    const suffix = el.dataset.countSuffix || '';
-    const counter = { val: 0 };
-
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 90%',
-      once: true,
-      onEnter: () => {
-        gsap.fromTo(counter, { val: 0 }, {
-          val: target,
-          duration: 1.6,
-          ease: 'power2.out',
-          onUpdate: () => { el.textContent = counter.val.toFixed(decimals) + suffix; }
-        });
-      }
-    });
-  });
+    .to('#heroBg', {
+      scale: 1.35,
+      ease: 'none',
+      // Em vez de dar zoom a partir do centro da foto, foca na parede
+      // onde está a placa "Imperatriz by Mônica Carnot" (lado direito).
+      transformOrigin: '76% 38%'
+    }, 0);
 
   // ---- Galeria: scroll horizontal fixo (apenas em ecrãs largos) ----
   const galeriaTrack = document.getElementById('galeriaTrack');
@@ -243,6 +216,83 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ---- Revelação "presa" ao scroll, como um filme ----
+  // Em vez de disparar uma vez (onEnter + duration), cada elemento tem
+  // o seu próprio scrollTrigger com "scrub": o progresso da animação
+  // segue diretamente a posição do scroll. Desces → avança; sobes →
+  // anda em reverse. Não há "once" porque não há nada para consumir —
+  // funciona sempre, tantas vezes quantas subires/desceres.
+  document.querySelectorAll('.reveal-up').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 56 },
+      {
+        opacity: 1, y: 0, ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 55%', scrub: 0.4 }
+      }
+    );
+  });
+  document.querySelectorAll('.reveal-img').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 56, scale: 0.9 },
+      {
+        opacity: 1, y: 0, scale: 1, ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top 92%', end: 'top 55%', scrub: 0.4 }
+      }
+    );
+  });
+
+  // ---- Painéis "cortina" sobre as imagens (wipe reveal), também presos ao scroll ----
+  document.querySelectorAll('[data-wipe]').forEach(wipeEl => {
+    const panel = wipeEl.querySelector('.wipe-panel');
+    if (!panel) return;
+    gsap.set(panel, { scaleX: 1 });
+    gsap.to(panel, {
+      scaleX: 0,
+      ease: 'none',
+      scrollTrigger: { trigger: wipeEl, start: 'top 88%', end: 'top 45%', scrub: 0.4 }
+    });
+  });
+
+  // ---- Statement: coroa + frase palavra a palavra em 3D, presos ao scroll ----
+  gsap.fromTo('.statement__crown',
+    { opacity: 0, scale: 0.85 },
+    {
+      opacity: 0.05, scale: 1, ease: 'none',
+      scrollTrigger: { trigger: '.statement', start: 'top 95%', end: 'top 40%', scrub: 0.4 }
+    }
+  );
+  const statementWords = splitText(document.querySelector('.statement__text'), 'words');
+  gsap.fromTo(statementWords,
+    { opacity: 0, y: 60, rotateX: -50 },
+    {
+      opacity: 1, y: 0, rotateX: 0, ease: 'none',
+      scrollTrigger: { trigger: '.statement', start: 'top 90%', end: 'top 35%', scrub: 0.4 }
+    }
+  );
+
+
+  // ---- Contadores (stats) ----
+  document.querySelectorAll('[data-count-to]').forEach(el => {
+    const target = parseFloat(el.dataset.countTo);
+    const decimals = parseInt(el.dataset.countDecimals || '0', 10);
+    const suffix = el.dataset.countSuffix || '';
+    const counter = { val: 0 };
+
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(counter, { val: 0 }, {
+          val: target,
+          duration: 1.6,
+          ease: 'power2.out',
+          onUpdate: () => { el.textContent = counter.val.toFixed(decimals) + suffix; }
+        });
+      }
+    });
+  });
+
   // ---- Cursor personalizado (só em dispositivos com rato) ----
   if (hasFinePointer) {
     document.documentElement.classList.add('has-fine-cursor');
@@ -262,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('mouseover', (e) => {
       const interactive = e.target.closest('a, button, [data-tilt], .galeria__item, .servico-row');
-      const onDark = e.target.closest('.hero, .statement, .footer, .fundadora, .final-cta, .marquee, .servico-card--featured, .nav-overlay');
+      const onDark = e.target.closest('.hero, .statement, .footer, .fundadora, .marquee, .nav-overlay');
       cursorRing.classList.toggle('is-hover', !!interactive);
       cursorRing.classList.toggle('is-light', !!onDark);
     });
@@ -299,5 +349,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Recálculo final de segurança: garante que todas as posições de
+  // scroll ficam corretas mesmo que algo (imagens, vídeos) ainda esteja
+  // a carregar e a alterar ligeiramente a altura da página.
+  ScrollTrigger.refresh();
 
 });
